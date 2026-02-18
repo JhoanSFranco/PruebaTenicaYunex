@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { ITS, ITSFormData } from '../types/its.types';
+import styles from './ITSForm.module.css';
 
 interface ITSFormProps {
   its?: ITS | null;
@@ -42,10 +43,10 @@ const ITSForm = ({ its, onSubmit, onCancel }: ITSFormProps) => {
   };
 
   return (
-    <div className="its-form-container">
+    <div className={styles.formContainer}>
       <h2>{its ? 'Editar Equipo ITS' : 'Agregar Nuevo Equipo ITS'}</h2>
-      <form onSubmit={handleSubmit} className="its-form">
-        <div className="form-group">
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.formGroup}>
           <label htmlFor="type">Tipo de Equipo:</label>
           <input
             type="text"
@@ -58,7 +59,7 @@ const ITSForm = ({ its, onSubmit, onCancel }: ITSFormProps) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="location">Ubicación:</label>
           <input
             type="text"
@@ -71,7 +72,7 @@ const ITSForm = ({ its, onSubmit, onCancel }: ITSFormProps) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="status">Estado:</label>
           <select
             id="status"
@@ -86,7 +87,7 @@ const ITSForm = ({ its, onSubmit, onCancel }: ITSFormProps) => {
           </select>
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="instalation_date">Fecha de Instalación:</label>
           <input
             type="date"
@@ -98,7 +99,7 @@ const ITSForm = ({ its, onSubmit, onCancel }: ITSFormProps) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="roadSegmentId">ID Segmento de Carretera (opcional):</label>
           <input
             type="number"
@@ -110,7 +111,7 @@ const ITSForm = ({ its, onSubmit, onCancel }: ITSFormProps) => {
           />
         </div>
 
-        <div className="form-actions">
+        <div className={styles.formActions}>
           <button type="submit" className="btn-submit">
             {its ? '💾 Actualizar' : '✅ Guardar'}
           </button>

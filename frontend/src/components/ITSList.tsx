@@ -4,6 +4,7 @@ import { roadSegmentService } from '../services/roadSegmentService';
 import type { ITS, ITSFormData } from '../types/its.types';
 import ITSCard from './ITSCard';
 import ITSForm from './ITSForm';
+import styles from './ITSList.module.css';
 
 const ITSList = () => {
   const [itsList, setItsList] = useState<ITS[]>([]);
@@ -146,12 +147,12 @@ const ITSList = () => {
   };
 
   if (loading) {
-    return <div className="loading">⏳ Cargando equipos ITS...</div>;
+    return <div className={styles.loading}>⏳ Cargando equipos ITS...</div>;
   }
 
   return (
-    <div className="its-list-container">
-      <div className="its-header">
+    <div className={styles.container}>
+      <div className={styles.header}>
         <h1>🚦 Gestión de Equipos ITS</h1>
         <button 
           className="btn-new"
@@ -182,14 +183,14 @@ const ITSList = () => {
         />
       )}
 
-      <div className="its-list">
+      <div className={styles.list}>
         {itsList.length === 0 ? (
-          <div className="empty-state">
+          <div className={styles.emptyState}>
             <p>📭 No hay equipos ITS registrados</p>
             <p>Haz clic en "Nuevo Equipo" para agregar uno</p>
           </div>
         ) : (
-          <div className="its-grid">
+          <div className={styles.grid}>
             {itsList.map((its) => (
               <ITSCard
                 key={its.id}

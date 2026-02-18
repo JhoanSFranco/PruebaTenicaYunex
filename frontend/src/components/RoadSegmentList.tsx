@@ -3,6 +3,7 @@ import { roadSegmentService } from '../services/roadSegmentService';
 import type { RoadSegment, RoadSegmentFormData } from '../types/roadSegment.types';
 import RoadSegmentCard from './RoadSegmentCard';
 import RoadSegmentForm from './RoadSegmentForm';
+import styles from './RoadSegmentList.module.css';
 
 const RoadSegmentList = () => {
   const [segmentsList, setSegmentsList] = useState<RoadSegment[]>([]);
@@ -118,12 +119,12 @@ const RoadSegmentList = () => {
   };
 
   if (loading) {
-    return <div className="loading">⏳ Cargando segmentos viales...</div>;
+    return <div className={styles.loading}>⏳ Cargando segmentos viales...</div>;
   }
 
   return (
-    <div className="road-segment-list-container">
-      <div className="road-segment-header">
+    <div className={styles.container}>
+      <div className={styles.header}>
         <h1>🛣️ Gestión de Segmentos Viales</h1>
         <button 
           className="btn-new"
@@ -154,14 +155,14 @@ const RoadSegmentList = () => {
         />
       )}
 
-      <div className="road-segment-list">
+      <div className={styles.list}>
         {segmentsList.length === 0 ? (
-          <div className="empty-state">
+          <div className={styles.emptyState}>
             <p>📭 No hay segmentos viales registrados</p>
             <p>Haz clic en "Nuevo Segmento" para agregar uno</p>
           </div>
         ) : (
-          <div className="road-segment-grid">
+          <div className={styles.grid}>
             {segmentsList.map((segment) => (
               <RoadSegmentCard
                 key={segment.id}

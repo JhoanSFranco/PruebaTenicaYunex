@@ -119,21 +119,21 @@ class ITSServiceTest {
     @Test
     void deleteITS_WhenITSExists_ShouldDeleteSuccessfully() {
         // Arrange
-        when(itsRepository.existsById(1L)).thenReturn(true);
+        when(itsRepository.findById(1L)).thenReturn(Optional.of(testITS));
         doNothing().when(itsRepository).deleteById(1L);
 
         // Act
         itsService.deleteITS(1L);
 
         // Assert
-        verify(itsRepository, times(1)).existsById(1L);
+        verify(itsRepository, times(1)).findById(1L);
         verify(itsRepository, times(1)).deleteById(1L);
     }
 
     @Test
     void deleteITS_WhenITSNotFound_ShouldThrowException() {
         // Arrange
-        when(itsRepository.existsById(999L)).thenReturn(false);
+        when(itsRepository.findById(999L)).thenReturn(Optional.empty());
 
         // Act & Assert
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
@@ -141,7 +141,7 @@ class ITSServiceTest {
         });
 
         assertTrue(exception.getMessage().contains("ITS not found"));
-        verify(itsRepository, times(1)).existsById(999L);
+        verify(itsRepository, times(1)).findById(999L);
         verify(itsRepository, never()).deleteById(anyLong());
     }
 

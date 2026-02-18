@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { RoadSegment, RoadSegmentFormData } from '../types/roadSegment.types';
+import styles from './RoadSegmentForm.module.css';
 
 interface RoadSegmentFormProps {
   segment?: RoadSegment | null;
@@ -40,10 +41,10 @@ const RoadSegmentForm = ({ segment, onSubmit, onCancel }: RoadSegmentFormProps) 
   };
 
   return (
-    <div className="road-segment-form-container">
+    <div className={styles.formContainer}>
       <h2>🛣️ {segment ? 'Editar Segmento Vial' : 'Agregar Nuevo Segmento Vial'}</h2>
-      <form onSubmit={handleSubmit} className="road-segment-form">
-        <div className="form-group">
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.formGroup}>
           <label htmlFor="name">Nombre del Segmento:</label>
           <input
             type="text"
@@ -56,7 +57,7 @@ const RoadSegmentForm = ({ segment, onSubmit, onCancel }: RoadSegmentFormProps) 
           />
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="location">Ubicación:</label>
           <input
             type="text"
@@ -69,7 +70,7 @@ const RoadSegmentForm = ({ segment, onSubmit, onCancel }: RoadSegmentFormProps) 
           />
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="length">Longitud (km):</label>
           <input
             type="number"
@@ -84,7 +85,7 @@ const RoadSegmentForm = ({ segment, onSubmit, onCancel }: RoadSegmentFormProps) 
           />
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="condition">Condición del Segmento:</label>
           <select
             id="condition"
@@ -100,7 +101,7 @@ const RoadSegmentForm = ({ segment, onSubmit, onCancel }: RoadSegmentFormProps) 
           </select>
         </div>
 
-        <div className="form-actions">
+        <div className={styles.formActions}>
           <button type="submit" className="btn-submit">
             {segment ? '💾 Actualizar' : '✅ Guardar'}
           </button>

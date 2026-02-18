@@ -7,6 +7,13 @@ type View = 'its' | 'segments';
 
 function App() {
   const [currentView, setCurrentView] = useState<View>('its');
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleViewChange = (view: View) => {
+    setCurrentView(view);
+    // Increment refresh key to force remount and reload data
+    setRefreshKey(prev => prev + 1);
+  };
 
   return (
     <div className="App">
@@ -15,13 +22,13 @@ function App() {
         <nav className="app-navigation">
           <button 
             className={`nav-tab ${currentView === 'its' ? 'active' : ''}`}
-            onClick={() => setCurrentView('its')}
+            onClick={() => handleViewChange('its')}
           >
             🚦 Equipos ITS
           </button>
           <button 
             className={`nav-tab ${currentView === 'segments' ? 'active' : ''}`}
-            onClick={() => setCurrentView('segments')}
+            onClick={() => handleViewChange('segments')}
           >
             🛣️ Segmentos Viales
           </button>
@@ -29,8 +36,8 @@ function App() {
       </div>
 
       <div className="app-content">
-        {currentView === 'its' && <ITSList />}
-        {currentView === 'segments' && <RoadSegmentList />}
+        {currentView === 'its' && <ITSList key={`its-${refreshKey}`} />}
+        {currentView === 'segments' && <RoadSegmentList key={`segments-${refreshKey}`} />}
       </div>
     </div>
   )

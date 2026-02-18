@@ -1,4 +1,5 @@
 import type { ITS } from '../types/its.types';
+import styles from './ITSCard.module.css';
 
 interface ITSCardProps {
   its: ITS;
@@ -30,14 +31,10 @@ const ITSCard = ({ its, onEdit, onDelete }: ITSCardProps) => {
   };
 
   return (
-    <div className="its-card">
-
-      <div className="its-card-header">
+    <div className={styles.card}>
+      <div className={styles.cardHeader}>
         <h3>ID: {its.id}</h3>
-
-        <div className="its-card-actions">
-            
-        
+        <div className={styles.cardActions}>
           <button 
             className="btn-edit"
             onClick={() => onEdit(its)}
@@ -45,8 +42,8 @@ const ITSCard = ({ its, onEdit, onDelete }: ITSCardProps) => {
           >
             Editar
           </button>
-
           <button 
+
             className="btn-delete"
             onClick={() => its.id && onDelete(its.id)}
             title="Eliminar"
@@ -57,33 +54,33 @@ const ITSCard = ({ its, onEdit, onDelete }: ITSCardProps) => {
       </div>
       
       {/* INFO OF ITS  */}
-      <div className="its-card-body">
-        <div className="its-info-row">
-          <span >Tipo:</span>
-          <span >{its.type}</span>
+      <div className={styles.cardBody}>
+        <div className={styles.infoRow}>
+          <span className={styles.label}>Tipo:</span>
+          <span className={styles.value}>{its.type}</span>
         </div>
         
-        <div className="its-info-row">
-          <span >Ubicación:</span>
-          <span >{its.location}</span>
+        <div className={styles.infoRow}>
+          <span className={styles.label}>Ubicación:</span>
+          <span className={styles.value}>{its.location}</span>
         </div>
         
-        <div className="its-info-row">
-          <span>Estado:</span>
-          <span>
+        <div className={styles.infoRow}>
+          <span className={styles.label}>Estado:</span>
+          <span className={styles.value}>
             {its.status} {getStatusEmoji(its.status)}
           </span>
         </div>
         
-        <div className="its-info-row">
-          <span >Fecha de Instalación:</span>
-          <span > {formatDate(its.instalation_date)}</span>
+        <div className={styles.infoRow}>
+          <span className={styles.label}>Fecha de Instalación:</span>
+          <span className={styles.value}>{formatDate(its.instalation_date)}</span>
         </div>
         
         {its.roadSegment && (
-          <div className="its-info-row">
-            <span >Segmento:</span>
-            <span >{its.roadSegment.name}</span>
+          <div className={styles.infoRow}>
+            <span className={styles.label}>Segmento:</span>
+            <span className={styles.value}>{its.roadSegment.name}</span>
           </div>
         )}
       </div>

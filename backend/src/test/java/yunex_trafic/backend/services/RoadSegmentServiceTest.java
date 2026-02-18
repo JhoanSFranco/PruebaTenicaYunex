@@ -133,21 +133,21 @@ class RoadSegmentServiceTest {
     @Test
     void deleteRoadSegment_WhenSegmentExists_ShouldDeleteSuccessfully() {
         // Arrange
-        when(roadSegmentRepository.existsById(1L)).thenReturn(true);
+        when(roadSegmentRepository.findById(1L)).thenReturn(Optional.of(testSegment));
         doNothing().when(roadSegmentRepository).deleteById(1L);
 
         // Act
         roadSegmentService.deleteRoadSegment(1L);
 
         // Assert
-        verify(roadSegmentRepository, times(1)).existsById(1L);
+        verify(roadSegmentRepository, times(1)).findById(1L);
         verify(roadSegmentRepository, times(1)).deleteById(1L);
     }
 
     @Test
     void deleteRoadSegment_WhenSegmentNotFound_ShouldThrowException() {
         // Arrange
-        when(roadSegmentRepository.existsById(999L)).thenReturn(false);
+        when(roadSegmentRepository.findById(999L)).thenReturn(Optional.empty());
 
         // Act & Assert
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
@@ -155,7 +155,7 @@ class RoadSegmentServiceTest {
         });
 
         assertTrue(exception.getMessage().contains("Road Segment not found"));
-        verify(roadSegmentRepository, times(1)).existsById(999L);
+        verify(roadSegmentRepository, times(1)).findById(999L);
         verify(roadSegmentRepository, never()).deleteById(anyLong());
     }
 
