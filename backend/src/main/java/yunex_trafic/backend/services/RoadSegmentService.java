@@ -40,9 +40,19 @@ public class RoadSegmentService {
     }
 
     public void deleteRoadSegment(Long id) {
-        if (!roadSegmentRepository.existsById(id)) {
-            throw new RuntimeException("Road Segment not found with id: " + id);
+        RoadSegmentModel segment = roadSegmentRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Road Segment not found with id: " + id));
+        
+        // Remove all ITS associations before deleting the segment
+        // This prevents ITS equipment from being deleted when segment is removed
+        if (segment.getItsList() != null && !segment.getItsList().isEmpty()) {
+            // Create a copy to avoid ConcurrentModificationException
+            List<ITSModel> itsCopy = new java.util.ArrayList<>(segment.getItsList());
+            for (ITSModel its : itsCopy) {
+                segment.removeITS(its);
+            }
         }
+        
         roadSegmentRepository.deleteById(id);
     }
 
@@ -53,6 +63,11 @@ public class RoadSegmentService {
         
         ITSModel its = itsRepository.findById(itsId)
             .orElseThrow(() -> new RuntimeException("ITS not found with id: " + itsId));
+        
+        // Check if ITS is already assigned to the same segment
+        if (its.getRoadSegment() != null && its.getRoadSegment().getId().equals(segmentId)) {
+            throw new RuntimeException("ITS is already assigned to this Road Segment");
+        }
         
         // Use the helper method to maintain bidirectional relationship
         segment.addITS(its);

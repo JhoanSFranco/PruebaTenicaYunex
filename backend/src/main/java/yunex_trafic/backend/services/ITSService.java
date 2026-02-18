@@ -44,9 +44,15 @@ public class ITSService {
     }
 
     public void deleteITS(Long id) {
-        if (!itsRepository.existsById(id)) {
-            throw new RuntimeException("ITS not found with id: " + id);
+        ITSModel its = itsRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("ITS not found with id: " + id));
+        
+        // Remove ITS from RoadSegment if it's associated
+        if (its.getRoadSegment() != null) {
+            RoadSegmentModel segment = its.getRoadSegment();
+            segment.removeITS(its);
         }
+        
         itsRepository.deleteById(id);
     }
 }

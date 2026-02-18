@@ -1,12 +1,15 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import ITSList from './components/ITSList'
+import RoadSegmentList from './components/RoadSegmentList'
+
+type View = 'its' | 'segments';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentView, setCurrentView] = useState<View>('its');
 
   return (
+<<<<<<< Updated upstream
     <>
       <div>
         <a href="https://vite.dev" target="_blank">
@@ -29,6 +32,32 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
+=======
+    <div className="App">
+      <div className="app-header">
+        <h1 className="app-title">🚦 Sistema de Gestión de Tráfico - Yunex</h1>
+        <nav className="app-navigation">
+          <button 
+            className={`nav-tab ${currentView === 'its' ? 'active' : ''}`}
+            onClick={() => setCurrentView('its')}
+          >
+            🚦 Equipos ITS
+          </button>
+          <button 
+            className={`nav-tab ${currentView === 'segments' ? 'active' : ''}`}
+            onClick={() => setCurrentView('segments')}
+          >
+            🛣️ Segmentos Viales
+          </button>
+        </nav>
+      </div>
+
+      <div className="app-content">
+        {currentView === 'its' && <ITSList />}
+        {currentView === 'segments' && <RoadSegmentList />}
+      </div>
+    </div>
+>>>>>>> Stashed changes
   )
 }
 
