@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-=======
 /* ============================================
    APLICACIÓN YUNEX - GESTIÓN DE TRÁFICO
    ============================================ */
@@ -24,7 +18,6 @@
 }
 
 .app-title {
->>>>>>> Stashed changes
   text-align: center;
   color: #2d3748;
   font-size: 2rem;
@@ -587,13 +580,3 @@
   }
 }
 
-<<<<<<< Updated upstream
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-=======
->>>>>>> Stashed changes
